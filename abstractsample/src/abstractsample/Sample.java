@@ -9,7 +9,6 @@ public abstract class Sample {
 		x=10;
 		y=20;
 	}
-	
 	void display()
 	{
 		System.out.println("this is abstract class");
