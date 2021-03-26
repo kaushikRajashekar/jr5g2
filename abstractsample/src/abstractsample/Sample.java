@@ -13,5 +13,6 @@ public abstract class Sample {
 	{
 		System.out.println("this is abstract class");
 	}
-	abstract void show();
+
 }
+
