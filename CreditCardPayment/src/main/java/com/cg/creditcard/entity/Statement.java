@@ -1,5 +1,4 @@
 package com.cg.creditcard.entity;
-
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,7 @@ public class Statement {
 	@Column
 	private Date due_date;
 	public Statement() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	public Statement(int statement_id, double due_amount, Date billing_date, Date due_date) {
 		super();

@@ -1,5 +1,4 @@
 package com.cg.creditcard.entity;
-
 import java.sql.Date;
 
 import javax.persistence.Column;

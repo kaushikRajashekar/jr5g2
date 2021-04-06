@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.creditcard.dto.CustomerDto;
 import com.cg.creditcard.entity.Customer;
 import com.cg.creditcard.service.CustomerService;
 @RestController
@@ -23,8 +24,8 @@ public class CustomerController {
 	CustomerService service;
 	
 	@PostMapping("/addCustomer")
-	public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
-		service.addCustomer(customer);
+	public ResponseEntity<String> addCustomer(@RequestBody CustomerDto customerdto) {
+		service.addCustomer(customerdto);
 		return new ResponseEntity<String>("Customer inserted",HttpStatus.OK);
 		}
 	

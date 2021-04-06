@@ -29,19 +29,19 @@ public class CreditCardController {
 		return new ResponseEntity<>("CreditCard added",HttpStatus.OK);
 	}
 	@DeleteMapping("/deletecard")
-	public ResponseEntity<String> deleteCreditCard(@RequestParam long card_number)
+	public ResponseEntity<String> deleteCreditCard(@RequestParam int card_number)
 	{
 		service.removeCreditCard(card_number);
 		return new ResponseEntity<String>("card deleted..",HttpStatus.OK);
 	}
 	@PutMapping("/updateCreditCard")
-	public ResponseEntity<String> updateCreditCard(@RequestBody CreditCard creditcard,@RequestParam long card_number)
+	public ResponseEntity<String> updateCreditCard(@RequestBody CreditCard creditcard,@RequestParam int card_number)
 	{
 		service.updateCreditCard(card_number, creditcard);
 		return new ResponseEntity<String>("Successfully updated",HttpStatus.OK);
 	}
 	@GetMapping("/getCreditCard")
-	public ResponseEntity<CreditCard> getCreditCard(@RequestParam long card_number)
+	public ResponseEntity<CreditCard> getCreditCard(@RequestParam int card_number)
 	{
 		CreditCard creditcard=service.getCreditCardById(card_number);
 		return new ResponseEntity<CreditCard>(creditcard,HttpStatus.OK);

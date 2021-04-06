@@ -1,15 +1,13 @@
 package com.cg.creditcard.entity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 @Entity
 @Table(name="CreditCard")
 public class CreditCard {
 	@Id
-	private long card_number;
+	private int card_number;
 	@Column
 	private String card_name;
 	@Column
@@ -21,7 +19,7 @@ public class CreditCard {
 	public CreditCard() {
 		
 	}
-	public CreditCard(long card_number, String card_name, int expiry_month, int expiry_year, double amount_limit) {
+	public CreditCard(int card_number, String card_name, int expiry_month, int expiry_year, double amount_limit) {
 		super();
 		this.card_number = card_number;
 		this.card_name = card_name;
@@ -29,10 +27,10 @@ public class CreditCard {
 		this.expiry_year = expiry_year;
 		this.amount_limit = amount_limit;
 	}
-	public long getCard_number() {
+	public int getCard_number() {
 		return card_number;
 	}
-	public void setCard_number(long card_number) {
+	public void setCard_number(int card_number) {
 		this.card_number = card_number;
 	}
 	public String getCard_name() {
