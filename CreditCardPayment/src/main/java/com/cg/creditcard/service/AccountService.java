@@ -31,18 +31,17 @@ public class AccountService implements IAccountService {
 			if(acc.getAccount_id()==account_id) {
 	               	dao.deleteById(account_id);
 	               	return;
-	}
+	         }
 		}
 		throw new IDNotFoundException();
 	}
-
 	@Override
 	public Account getAccount(int account_id)throws IDNotFoundException {
 		accountList=dao.findAll();
 		for(Account acc:accountList) {
 			if(acc.getAccount_id()==account_id) {
 		return dao.findById(account_id).orElse(null);
-	}
+             	}
 		}
 		throw new IDNotFoundException();
 	}
@@ -53,7 +52,7 @@ public class AccountService implements IAccountService {
 			if(acc.getAccount_id()==account_id) {
 		dao.save(account);	
 		return;
-	}
+           	}
 		}
 		throw new IDNotFoundException();
 	}

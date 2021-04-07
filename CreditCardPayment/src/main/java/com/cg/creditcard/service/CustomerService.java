@@ -57,7 +57,6 @@ public class CustomerService implements ICustomerService {
 	    }
 	    dao.save(customer);  
 	}
-
 	@Override
 	public void removeCustomer(int userid) throws IDNotFoundException {
 		customerList=dao.findAll();
@@ -65,8 +64,8 @@ public class CustomerService implements ICustomerService {
 			if(cdt.getUserid()==userid) {
 				dao.deleteById(userid);
 				return;
-	}	
-	}
+	        }	
+	    }
 		throw new  IDNotFoundException();
 	}
 
@@ -88,7 +87,7 @@ public class CustomerService implements ICustomerService {
 			if(cdt.getUserid()==userid) {
 		dao.save(customer);
 		return;
-	}
+	        }
 		}
 		throw new IDNotFoundException();
 	}
@@ -98,7 +97,7 @@ public class CustomerService implements ICustomerService {
 		customerList=dao.findAll();
 	if(customerList==null) {
 		throw new ListIsEmptyException();
-	}
+	        }
 		return customerList;
 	}
 }

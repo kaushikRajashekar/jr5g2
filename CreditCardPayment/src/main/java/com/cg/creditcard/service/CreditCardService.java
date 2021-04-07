@@ -1,5 +1,4 @@
 package com.cg.creditcard.service;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import com.cg.creditcard.utils.CardNumberNotFoundException;
 import com.cg.creditcard.utils.DuplicateAccountException;
 import com.cg.creditcard.utils.IDNotFoundException;
 import com.cg.creditcard.utils.ListIsEmptyException;
-
 @Service
 public class CreditCardService implements ICreditCardService {
 	@Autowired
@@ -27,7 +25,6 @@ public class CreditCardService implements ICreditCardService {
 		}
 		dao.save(creditcard);
 	}
-
 	@Override
 	public void removeCreditCard(int card_number) throws CardNumberNotFoundException {
 		creditcardList=dao.findAll();
@@ -35,11 +32,10 @@ public class CreditCardService implements ICreditCardService {
 			if(cc.getCard_number()==card_number) {
 		             dao.deleteById(card_number);
 		             return;
-	}
+              	}
 		}
 		throw new CardNumberNotFoundException();	
 	}
-
 	@Override
 	public void updateCreditCard(int card_number, CreditCard creditcard) throws CardNumberNotFoundException {
 		creditcardList=dao.findAll();

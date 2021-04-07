@@ -32,6 +32,4 @@ public class StatementController {
 		List<Statement>statementList=service.getAllStatement();
 		return new ResponseEntity<List<Statement>>(statementList,HttpStatus.OK);	
 	}
-
-
 }

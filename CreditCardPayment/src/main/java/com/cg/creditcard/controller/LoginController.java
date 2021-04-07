@@ -28,5 +28,5 @@ public class LoginController {
 		service.changePassword(login,password);
 		return new ResponseEntity<String>("Successfully updated", HttpStatus.OK);
 
-}
+        }
 }

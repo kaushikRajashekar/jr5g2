@@ -78,9 +78,6 @@ public class CustomerDto {
 	}
 	public void setStatement(int statement) {
 		this.statement = statement;
-	}
-	 
-	
-	
+	}	
 }
 
