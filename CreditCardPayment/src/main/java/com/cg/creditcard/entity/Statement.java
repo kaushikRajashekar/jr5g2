@@ -1,9 +1,18 @@
 package com.cg.creditcard.entity;
 import java.sql.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+//Entity with table name
 @Entity
 @Table(name="Statement")
 public class Statement {
@@ -15,16 +24,25 @@ public class Statement {
 	private Date billing_date;
 	@Column
 	private Date due_date;
-	public Statement() {
-		
-	}
-	public Statement(int statement_id, double due_amount, Date billing_date, Date due_date) {
-		super();
-		this.statement_id = statement_id;
-		this.due_amount = due_amount;
-		this.billing_date = billing_date;
-		this.due_date = due_date;
-	}
+	
+	//One to one mapping with Payment table
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "paymentId")
+    private Payment payment;
+	
+	//Many to one mapping with Customer table
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name="userid")
+// @JsonBackReference
+//    private Customer customer;
+
+	//Required getters and setters
+//	public Customer getCustomer() {
+//		return customer;
+//	}
+//	public void setCustomer(Customer customer) {
+//		this.customer = customer;
+//	}
 	public int getStatement_id() {
 		return statement_id;
 	}
@@ -49,9 +67,10 @@ public class Statement {
 	public void setDue_date(Date due_date) {
 		this.due_date = due_date;
 	}
-	@Override
-	public String toString() {
-		return "Statement [statement_id=" + statement_id + ", due_amount=" + due_amount + ", billing_date="
-				+ billing_date + ", due_date=" + due_date + "]";
+	public Payment getPayment() {
+		return payment;
+	}
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 }

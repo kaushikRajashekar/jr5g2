@@ -24,11 +24,7 @@ public class CreditCardPaymentExceptionHandler {
 	public ResponseEntity<Object> exception(ListIsEmptyException cnfx){
 		return new ResponseEntity<Object>("List is empty...",HttpStatus.NOT_FOUND);
 	}
-	
-	@ExceptionHandler(value = DuplicateAccountException.class)
-	public ResponseEntity<Object> exception(DuplicateAccountException dae){
-		return new ResponseEntity<Object>("Duplication of account not allowed...",HttpStatus.NOT_FOUND);
-	}
+
 	@ExceptionHandler(value = IDNotFoundException.class)
 	public ResponseEntity<Object> exception(IDNotFoundException idnfe){
 		return new ResponseEntity<Object>("ID not found...",HttpStatus.NOT_FOUND);

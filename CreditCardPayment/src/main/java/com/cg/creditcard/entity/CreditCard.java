@@ -1,8 +1,15 @@
 package com.cg.creditcard.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+//Entity with table name="CreditCard"
 @Entity
 @Table(name="CreditCard")
 public class CreditCard {
@@ -16,17 +23,18 @@ public class CreditCard {
 	private int expiry_year;
 	@Column
 	private double amount_limit;
+	
+	//Constructor
 	public CreditCard() {
-		
 	}
-	public CreditCard(int card_number, String card_name, int expiry_month, int expiry_year, double amount_limit) {
-		super();
-		this.card_number = card_number;
-		this.card_name = card_name;
-		this.expiry_month = expiry_month;
-		this.expiry_year = expiry_year;
-		this.amount_limit = amount_limit;
-	}
+	
+	//Many to one mapping with Customer table
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonBackReference
+	@JoinColumn(name = "userid")
+	private Customer customer;
+	
+	//Required getters and setters
 	public int getCard_number() {
 		return card_number;
 	}
@@ -57,9 +65,11 @@ public class CreditCard {
 	public void setAmount_limit(double amount_limit) {
 		this.amount_limit = amount_limit;
 	}
-	@Override
-	public String toString() {
-		return "CreditCard [card_number=" + card_number + ", card_name=" + card_name + ", expiry_month=" + expiry_month
-				+ ", expiry_year=" + expiry_year + ", amount_limit=" + amount_limit + "]";
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 }

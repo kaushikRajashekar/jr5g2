@@ -1,8 +1,15 @@
 package com.cg.creditcard.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+//Entity with table name ="Account"
 @Entity
 @Table(name = "Account")
 public class Account {
@@ -12,15 +19,14 @@ public class Account {
 	private String account_name;
 	@Column
 	private double balance;
-	public Account() {
-		
-	}
-	public Account(int account_id, String account_name, double balance) {
-		super();
-		this.account_id = account_id;
-		this.account_name = account_name;
-		this.balance = balance;
-	}
+	
+	//Many to one mapping to Customer table
+@ManyToOne(fetch = FetchType.EAGER)
+@JoinColumn(name="userid")
+ @JsonBackReference
+    private Customer customer;
+	
+//required getters and setters
 	public int getAccount_id() {
 		return account_id;
 	}
@@ -39,8 +45,11 @@ public class Account {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	@Override
-	public String toString() {
-		return "Account [account_id=" + account_id + ", account_name=" + account_name + ", balance=" + balance + "]";
+	public Customer getCustomer() {
+		return customer;
 	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
 }

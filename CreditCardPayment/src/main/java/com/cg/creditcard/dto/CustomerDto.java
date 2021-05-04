@@ -1,6 +1,7 @@
 package com.cg.creditcard.dto;
 
 import java.sql.Date;
+import java.util.List;
 public class CustomerDto {
 	private int userid;
 	private String first_name;
@@ -8,11 +9,13 @@ public class CustomerDto {
 	private String email;
 	private String contact_no;
 	private Date dob;
-	private int account;
-	private int creditcard;
-	private int address;
-	private int paymentTransaction;
-	 private int statement;
+	private String password;
+	private String message;
+	private String role;
+	// private int statement;
+	private List<AccountDto> account;
+	
+	//Requires getters and setters
 	public int getUserid() {
 		return userid;
 	}
@@ -49,35 +52,35 @@ public class CustomerDto {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public int getAccount() {
+//	public int getStatement() {
+//		return statement;
+//	}
+//	public void setStatement(int statement) {
+//		this.statement = statement;
+//	}
+	public List<AccountDto> getAccount() {
 		return account;
 	}
-	public void setAccount(int account) {
+	public void setAccount(List<AccountDto> account) {
 		this.account = account;
 	}
-	public int getCreditcard() {
-		return creditcard;
+	public String getPassword() {
+		return password;
 	}
-	public void setCreditcard(int creditcard) {
-		this.creditcard = creditcard;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public int getAddress() {
-		return address;
+	public String getMessage() {
+		return message;
 	}
-	public void setAddress(int address) {
-		this.address = address;
+	public void setMessage(String message) {
+		this.message = message;
 	}
-	public int getPaymentTransaction() {
-		return paymentTransaction;
+	public String getRole() {
+		return role;
 	}
-	public void setPaymentTransaction(int paymentTransaction) {
-		this.paymentTransaction = paymentTransaction;
+	public void setRole(String role) {
+		this.role = role;
 	}
-	public int getStatement() {
-		return statement;
-	}
-	public void setStatement(int statement) {
-		this.statement = statement;
-	}	
 }
 

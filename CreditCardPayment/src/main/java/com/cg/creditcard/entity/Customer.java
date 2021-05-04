@@ -1,16 +1,21 @@
 package com.cg.creditcard.entity;
 import java.sql.Date;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+//Entity with table name ="Customer"
 @Entity
 @Table(name = "Customer")
 public class Customer {
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userid;
 	@Column
 	private String first_name;
@@ -22,45 +27,33 @@ public class Customer {
 	private String contact_no;
 	@Column
 	private Date dob;
+	@Column
+	private String password;
+	private String message;
+	private String role;
+	//Constructor
 	public Customer() {
-
 	}
-	public Customer(int userid, String first_name, String last_name, String email, String contact_no, Date dob,
-			Account account, CreditCard creditcard, Address address, PaymentTransaction paymentTransaction,
-			Statement statement) {
-		super();
-		this.userid = userid;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.contact_no = contact_no;
-		this.dob = dob;
-		this.account = account;
-		this.creditcard = creditcard;
-		this.address = address;
-		this.paymentTransaction = paymentTransaction;
-		this.statement = statement;
-	}
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "account_id")
-	private Account account;
+	//One to many mapping with the respective tables
+//	@OneToMany(mappedBy = "customer")
+//	@JsonManagedReference
+//	private List<CreditCard>creditcard;
+//	
+//	@OneToMany(mappedBy = "customer")
+//	private List<Address>address;
+//	
+	//@OneToMany(mappedBy = "customer")
+	//private List<Payment>payment;
+//	
+//	@OneToMany(mappedBy = "customer")
+//	 @JsonManagedReference
+//    private List<Statement>statement;
+//	
+	@OneToMany(mappedBy = "customer")
+  @JsonManagedReference
+	private List<Account> account;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="card_number")
-	private CreditCard creditcard;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "door_no")
-	private Address address;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "transaction_id")
-	private PaymentTransaction paymentTransaction;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "statement_id")
-    private Statement statement;
+	//Required getters and setters
 	public int getUserid() {
 		return userid;
 	}
@@ -97,41 +90,52 @@ public class Customer {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public Account getAccount() {
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+//	public List<CreditCard> getCreditcard() {
+//		return creditcard;
+//	}
+//	public void setCreditcard(List<CreditCard> creditcard) {
+//		this.creditcard = creditcard;
+//	}
+//	public List<Address> getAddress() {
+//		return address;
+//	}
+//	public void setAddress(List<Address> address) {
+//		this.address = address;
+//	}
+//	public List<Payment> getPayment() {
+//		return payment;
+//	}
+//	public void setPayment(List<Payment> payment) {
+//		this.payment = payment;
+//	}
+//	public List<Statement> getStatement() {
+//		return statement;
+//	}
+//	public void setStatement(List<Statement> statement) {
+//		this.statement = statement;
+//	}
+	public List<Account> getAccount() {
 		return account;
 	}
-	public void setAccount(Account account) {
+	public void setAccount(List<Account> account) {
 		this.account = account;
-	}
-	public CreditCard getCreditcard() {
-		return creditcard;
-	}
-	public void setCreditcard(CreditCard creditcard) {
-		this.creditcard = creditcard;
-	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	public PaymentTransaction getPaymentTransaction() {
-		return paymentTransaction;
-	}
-	public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
-		this.paymentTransaction = paymentTransaction;
-	}
-	public Statement getStatement() {
-		return statement;
-	}
-	public void setStatement(Statement statement) {
-		this.statement = statement;
-	}
-	@Override
-	public String toString() {
-		return "Customer [userid=" + userid + ", first_name=" + first_name + ", last_name=" + last_name + ", email="
-				+ email + ", contact_no=" + contact_no + ", dob=" + dob + ", account=" + account + ", creditcard="
-				+ creditcard + ", address=" + address + ", paymentTransaction=" + paymentTransaction + ", statement="
-				+ statement + "]";
 	}
 }

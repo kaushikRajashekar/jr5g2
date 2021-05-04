@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.creditcard.dao.AccountRepository;
+import com.cg.creditcard.dto.AccountDto;
 import com.cg.creditcard.entity.Account;
-import com.cg.creditcard.utils.DuplicateAccountException;
 import com.cg.creditcard.utils.IDNotFoundException;
 import com.cg.creditcard.utils.ListIsEmptyException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class AccountService implements IAccountService {
 	@Autowired
@@ -16,23 +18,19 @@ public class AccountService implements IAccountService {
 	List<Account> accountList=new ArrayList<>();
 
 	@Override
-	public void addAccount(Account account) throws DuplicateAccountException{
-		 for(Account acc:accountList) {
-	    	 if(acc.getAccount_id()==account.getAccount_id()) {
-	    		 throw  new DuplicateAccountException();
-	    	 }
-	    }
+	public void addAccount(AccountDto accountDto) {
+		ObjectMapper mapper=new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		Account account=new Account();
+		account=mapper.convertValue(accountDto, Account.class);
 		dao.save(account);
 	}
 	@Override
 	public void removeAccount(int account_id) throws IDNotFoundException{
-		accountList=dao.findAll();
-		for(Account acc:accountList) {
-			if(acc.getAccount_id()==account_id) {
-	               	dao.deleteById(account_id);
-	               	return;
+		if(dao.existsById(account_id)) {
+			dao.deleteById(account_id);
 	         }
-		}
+		
 		throw new IDNotFoundException();
 	}
 	@Override
@@ -58,10 +56,7 @@ public class AccountService implements IAccountService {
 	}
 	@Override
 	public List<Account> getAllAccount() throws ListIsEmptyException{
-		accountList=dao.findAll();
-			if(accountList==null) {
-			throw new ListIsEmptyException();
-			}
-		return dao.findAll();
+		List<Account> accountList =dao.findAll();
+		return accountList;
 	}
 }

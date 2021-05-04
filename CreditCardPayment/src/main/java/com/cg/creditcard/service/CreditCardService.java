@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.cg.creditcard.dao.CreditCardRepository;
 import com.cg.creditcard.entity.CreditCard;
 import com.cg.creditcard.utils.CardNumberNotFoundException;
-import com.cg.creditcard.utils.DuplicateAccountException;
 import com.cg.creditcard.utils.IDNotFoundException;
 import com.cg.creditcard.utils.ListIsEmptyException;
 @Service
@@ -16,15 +15,10 @@ public class CreditCardService implements ICreditCardService {
 	List<CreditCard>creditcardList=new ArrayList<>();
 
 	@Override
-	public void addCreditCard(CreditCard creditcard) throws DuplicateAccountException {
-		creditcardList=dao.findAll();
-		for(CreditCard cc:creditcardList) {
-			if(cc.getCard_number()==creditcard.getCard_number()) {
-				throw new DuplicateAccountException();
-			}
-		}
+	public void addCreditCard(CreditCard creditcard) {
 		dao.save(creditcard);
 	}
+	
 	@Override
 	public void removeCreditCard(int card_number) throws CardNumberNotFoundException {
 		creditcardList=dao.findAll();
@@ -47,6 +41,7 @@ public class CreditCardService implements ICreditCardService {
 		}
 		throw new CardNumberNotFoundException();
 	}
+	
 	@Override
 	public CreditCard getCreditCardById(int card_number) throws CardNumberNotFoundException {
 		creditcardList=dao.findAll();
@@ -54,7 +49,7 @@ public class CreditCardService implements ICreditCardService {
 			if(cc.getCard_number()==card_number) {
 				return dao.findById(card_number).orElse(null);
 			}
-		}
+			}
 		throw new  IDNotFoundException();
 	}
 	@Override
