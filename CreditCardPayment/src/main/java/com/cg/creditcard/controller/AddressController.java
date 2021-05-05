@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.creditcard.dto.AddressDto;
 import com.cg.creditcard.entity.Address;
 import com.cg.creditcard.service.AddressService;
 
@@ -23,7 +25,7 @@ public class AddressController {
 	AddressService service;
 	
 	@PostMapping("/addaddress")
-	public ResponseEntity<String> addAddress(@RequestBody Address address)
+	public ResponseEntity<String> addAddress(@RequestBody AddressDto address)
 	{
 		service.addAddress(address);
 		return new ResponseEntity<>("Address added",HttpStatus.OK);
