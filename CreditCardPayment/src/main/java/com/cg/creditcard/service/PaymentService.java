@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.creditcard.dao.PaymentRepository;
+import com.cg.creditcard.dto.PaymentDto;
+import com.cg.creditcard.entity.Account;
 import com.cg.creditcard.entity.Payment;
 import com.cg.creditcard.utils.IDNotFoundException;
 import com.cg.creditcard.utils.NoTransactionFoundException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class PaymentService implements IPaymentService {
@@ -37,8 +41,13 @@ public class PaymentService implements IPaymentService {
 	}
 
 	@Override
-	public void addPayment(Payment payment) {
+	public void addPayment(PaymentDto paymentDto) {
+		ObjectMapper mapper=new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		Payment payment=new Payment();
+		payment=mapper.convertValue(paymentDto, Payment.class);
 		dao.save(payment);
+		
 	}
 
 }

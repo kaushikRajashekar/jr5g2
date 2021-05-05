@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.creditcard.dto.PaymentDto;
 import com.cg.creditcard.entity.Payment;
 import com.cg.creditcard.service.PaymentService;
 
@@ -21,9 +23,9 @@ public class PaymentController {
 	PaymentService service;
 	
 	@PostMapping("/addpayment")
-	public ResponseEntity<String> addCreditCard(@RequestBody Payment payment)
+	public ResponseEntity<String> addCreditCard(@RequestBody PaymentDto paymentDto)
 	{
-		service.addPayment(payment);
+		service.addPayment(paymentDto);
 		return new ResponseEntity<>("New payment  added",HttpStatus.OK);
 	}
 	@GetMapping("/getall")
